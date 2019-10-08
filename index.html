@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Joe's Hotdog Stand</title>
+	<style type="text/css">
+		body {
+			background-color: #d7e3ec;
+		}
+		h1 {
+			text-align: center;
+			font-size: 30px;
+			color: #16516d;
+		}
+		h2 {
+			text-align: center;
+			font-size: 20px;
+			color: #16516d;
+		}
+		div {
+			text-align: center;
+			display: block;
+			padding: 30px;
+		}
+
+		form {
+			border-style: solid;
+			border-color: #16516d;
+			border-width: 10px;
+			width: 500px;
+			padding: 20px;
+			display: inline-block;
+			text-align: center;
+			background-color: #bfb9b8;
+		}
+	</style>
+	<script language="javascript" type="text/javascript">
+		menu = new Array;
+		menu = {hotdog: 3.25, fries: 2.00, drink: 1.50};
+
+		order = new Array;
+		var x = 0, y = 0, z = 0;
+		order = {numHotdogs: x, numFries: y, numDrink: z};
+	
+		function showVal() {
+			order["numHotdogs"] = document.getElementById("txt1").value;
+			order["numFries"] = document.getElementById("txt2").value;
+			order["numDrink"] = document.getElementById("txt3").value;
+
+			var subtotal = (order["numHotdogs"]*menu["hotdog"]) + (order["numFries"]*menu["fries"]) + (order["numDrink"]*menu["drink"]);
+
+			if(subtotal >= 20) {
+				var newSub = (subtotal - (subtotal * .1));
+				newSub = Math.round(newSub * 100)/100;
+				var discount = subtotal*0.1;
+				discount = Math.round(discount * 100)/100;
+				var discount = "YES.  Discount = -$" + discount;
+			} else {
+				var discount = "NO";
+			}
+
+			var tax = 0;
+			tax = (newSub * .0625);
+			tax = Math.round(tax * 100)/100;
+			var totalPrice = newSub + tax;
+			totalPrice = Math.round(totalPrice * 100)/100;
+
+			alert("Items Ordered: \n   Hotdogs: " + order["numHotdogs"] + "\n   Fries: " + order["numFries"] + "\n   Drinks: " + order["numDrink"] + "\n\nSubtotal = $" + subtotal + "\nDiscount?  " + discount + "\nMassachussetts Tax = 6.25% = +$" + tax + "\nTotal Price: $" + totalPrice);
+		}
+	</script>
+
+</head>
+<body>
+	<h1>Welcome to Joe's Hotdog Stand!</h1>
+	<h2>Please place your order in the form below.</h2>
+	<div>
+		<form>
+			Hotdogs: <input type="number" id="txt1">
+			<br>
+			<br>
+			Fries: <input type="number" id="txt2">
+			<br>
+			<br>
+			Drinks: <input type="number" id="txt3">
+			<br>
+			<br>
+			<input type="button" onclick="showVal()" value="Order">
+		</form>
+	</div>
+
+</body>
+</html>
